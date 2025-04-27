@@ -80,7 +80,7 @@ class _CreateNotePageState extends State<CreateNotePage> {
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Bloc-notes'),
+          title: Text('Bloc-Notes'),
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {

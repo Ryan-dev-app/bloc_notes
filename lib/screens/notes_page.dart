@@ -40,22 +40,29 @@ class _NotesPageState extends State<NotesPage> {
         case SortOption.creationDate:
           _notes.sort((a, b) {
             if (a.createdAt == null || b.createdAt == null) {
-              return 0; // Gérer le cas où une date est nulle
+              return 0;
             }
-            return b.createdAt!.compareTo(a.createdAt!); // Ordre décroissant (plus récent en premier)
+            return b.createdAt!.compareTo(a.createdAt!);
           });
           break;
         case SortOption.lastModified:
           _notes.sort((a, b) {
             if (a.updatedAt == null || b.updatedAt == null) {
-              return 0; // Gérer le cas où une date est nulle
+              return 0;
             }
-            return b.updatedAt!.compareTo(a.updatedAt!); // Ordre décroissant (plus récent en premier)
+            return b.updatedAt!.compareTo(a.updatedAt!);
           });
           break;
       }
+
+      // 💡 Afficher les notes dans la console après tri
+      print("Notes triées ($_currentSortOption) :");
+      for (var note in _notes) {
+        print("ID : ${note.id}, Titre: ${note.title}, Créé: ${note.createdAt}, Modifié: ${note.updatedAt}");
+      }
     });
   }
+
 
   _loadAndSortNotes() async {
     await _loadNotes();
@@ -102,7 +109,7 @@ class _NotesPageState extends State<NotesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Bloc-Note'),
+        title: Text('Bloc-Notes'),
         actions: <Widget>[
           PopupMenuButton<SortOption>(
             onSelected: (SortOption result) {

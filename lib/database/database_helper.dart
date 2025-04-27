@@ -28,16 +28,39 @@ class DatabaseHelper {
   }
 
   Future<void> _onCreate(Database db, int version) async {
+    // Création de la table des notes
     await db.execute('''
-      CREATE TABLE notes(
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        title TEXT,
-        content TEXT,
-        created_at INTEGER,
-        updated_at INTEGER
-      )
-    ''');
+    CREATE TABLE notes(
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      title TEXT,
+      content TEXT,
+      created_at INTEGER,
+      updated_at INTEGER
+    )
+  ''');
+
+    // Ajouter une note de bienvenue avec des informations sur l'app
+    final now = DateTime.now().millisecondsSinceEpoch;
+    Map<String, dynamic> welcomeNote = {
+      'title': 'Bienvenue dans l\'app de Bloc-Notes',
+      'content': '''
+Cette application vous permet de créer, modifier et supprimer vos notes facilement.
+
+Nous respectons pleinement la confidentialité de vos données : 
+- Vos notes sont stockées localement sur votre appareil.
+- Aucune de vos données n'est partagée avec des tiers.
+- L'application ne contient aucune publicité.
+
+Profitez bien de l\'app et de votre expérience sans distractions ni préoccupations !''',
+      'created_at': now,
+      'updated_at': now
+    };
+
+    // Insérer la note de bienvenue dans la base de données
+    await db.insert('notes', welcomeNote);
   }
+
+
 
   Future<int> insertNote(Map<String, dynamic> note) async {
     Database db = await instance.database;

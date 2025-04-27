@@ -103,7 +103,7 @@ class _EditNotePageState extends State<EditNotePage> {
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Bloc-notes'),
+          title: Text('Bloc-Notes'),
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
@@ -117,7 +117,10 @@ class _EditNotePageState extends State<EditNotePage> {
               onPressed: _saveAndPop, // Appelle la fonction pour sauvegarder et revenir
             ),
             IconButton(
-              icon: Icon(Icons.delete), // Icône de la poubelle
+              icon: Icon(
+                Icons.delete,
+                color: Color(0xaaa30303),
+              ), // Icône de la poubelle
               onPressed: () => _deleteNote(context), // Appelle la fonction de suppression
             ),
           ],
